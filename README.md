@@ -1,258 +1,597 @@
-# TalentMind AI 🧠✨
+# TalentMind AI 🧠
 
-> **AI-powered hiring intelligence platform that understands talent beyond keywords.**
+### AI-Powered Hiring Intelligence Platform That Understands Talent Beyond Keywords
 
-TalentMind AI is a world-class SaaS frontend for an AI-powered hiring intelligence platform. Built for hackathons and production demos, it features a premium dark-first design inspired by Linear, Vercel, Ashby, Greenhouse, and LinkedIn Recruiter.
+> Building the future of hiring by combining role understanding, candidate intelligence, behavioral analysis, career trajectory modeling, platform activity insights, semantic retrieval, and explainable AI ranking.
 
 ---
 
-## 🚀 Quick Start
+## 🚀 Overview
 
-```bash
-# 1. Navigate to the frontend directory
-cd challenge_ai_hiring/ui/frontend
+Recruiters often review hundreds or thousands of candidate profiles while trying to identify the best fit for a role.
 
-# 2. Install dependencies
-npm install
+Traditional Applicant Tracking Systems (ATS) and keyword-based filtering systems frequently miss exceptional candidates because they rely heavily on exact keyword matching rather than understanding:
 
-# 3. Start the development server
-npx next dev
+* Career growth
+* Behavioral characteristics
+* Leadership potential
+* Platform engagement
+* Learning mindset
+* Contextual role fit
+
+TalentMind AI solves this problem by acting as an AI-powered recruiter that evaluates candidates holistically.
+
+Instead of asking:
+
+> “Does this resume contain the right keywords?”
+
+TalentMind AI asks:
+
+> “Would an experienced recruiter shortlist this candidate for this role?”
+
+---
+
+# 🎯 Challenge Statement
+
+This project was built for the **Data & AI Challenge**.
+
+The challenge requires participants to:
+
+* Understand job requirements
+* Understand candidate profiles
+* Analyze behavioral signals
+* Analyze platform activity
+* Generate recruiter-quality rankings
+* Produce trustworthy candidate shortlists
+
+TalentMind AI addresses each of these requirements through a multi-agent AI architecture.
+
+---
+
+# 💡 Problem We Are Solving
+
+Recruiters face three major problems:
+
+### 1. Keyword Matching Fails
+
+A candidate may have the required skills but describe them differently.
+
+Traditional systems miss these candidates.
+
+---
+
+### 2. Behavioral Signals Are Ignored
+
+Most hiring systems cannot evaluate:
+
+* Ownership
+* Leadership
+* Initiative
+* Communication
+* Learning mindset
+
+Yet recruiters rely heavily on these traits.
+
+---
+
+### 3. Career Growth Is Overlooked
+
+A rapidly growing candidate can be more valuable than someone with more years of experience.
+
+Most ranking systems ignore trajectory and focus only on static experience.
+
+---
+
+# 🏗 Solution
+
+TalentMind AI combines structured candidate intelligence with LLM reasoning to rank candidates like an expert recruiter.
+
+The platform evaluates:
+
+✅ Skills
+
+✅ Experience
+
+✅ Behavioral Signals
+
+✅ Career Growth
+
+✅ Platform Activity
+
+✅ Semantic Role Fit
+
+---
+
+# 🧠 System Architecture
+
+```text
+Job Description
+        │
+        ▼
+Role Understanding Agent
+        │
+        ▼
+Candidate Intelligence Agent
+        │
+        ▼
+Behavioral Signal Agent
+        │
+        ▼
+Career Trajectory Agent
+        │
+        ▼
+Platform Activity Agent
+        │
+        ▼
+Hybrid Retrieval Engine
+        │
+        ▼
+LLM Recruiter Ranking Agent
+        │
+        ▼
+Explainability Agent
+        │
+        ▼
+Final Ranked Shortlist
 ```
 
-The app will be available at **http://localhost:3000** (or the next available port).
+---
+
+# 📊 Dataset Usage
+
+The challenge provides:
+
+```text
+candidate_schema.json
+candidates.jsonl
+job_description.docx
+redrob_signals_doc.docx
+sample_submission.csv
+validate_submission.py
+```
+
+### Candidate Dataset
+
+Contains structured candidate information including:
+
+* Skills
+* Experience
+* Education
+* Certifications
+* Career history
+* Platform activity
 
 ---
 
-## 📸 Pages & Features
+### Redrob Signals Dataset
 
-### 🏠 Landing Page (`/`)
-- Animated particle network background
-- Scroll-based parallax hero section
-- Floating cards (Candidate Score, Behavioral Analysis, AI Insights)
-- 6 feature cards with gradient icons and hover effects
-- Stats section (100K+ Candidates, 99.9% Accuracy, etc.)
-- CTA section with gradient backgrounds
-- Scroll indicator animation
+Contains behavioral and engagement signals such as:
 
-### 🎮 Interactive Demo (`/demo`)
-- Standalone demo page with particle network
-- 3 feature highlights (Smart Rankings, Behavioral AI, Talent Intelligence)
-- Quick links to Dashboard and Rankings
+* Recruiter response rate
+* Interview completion rate
+* Search appearances
+* Recruiter saves
+* GitHub activity
+* Profile completeness
 
-### 📊 Executive Dashboard (`/dashboard`)
-- 4 animated KPI cards with gradient icons
-- Animated counters (100K+ Total Candidates, Top Matches, etc.)
-- AI-powered Recruiter Insights (3 insight cards)
-- Hiring Funnel visualization with Recharts bar chart
-- Funnel Summary panel with conversion rate
-
-### 🔍 Job Analysis (`/job-analysis`)
-- Role Summary with AI-generated description
-- Required Skills with confidence badges
-- Preferred Skills with purple-themed badges
-- Behavioral Traits with progress bars
-- Hiring Priorities list with animations
-
-### 🏆 Candidate Rankings (`/ranking`)
-- 8 candidates with diverse profiles
-- Medal icons for Top 3 (#1 Gold, #2 Silver, #3 Bronze)
-- Animated progress bars for Fit Score
-- Skills column with overflow indicators
-- 5 filter categories (Skills, Experience, Industry, Behavior, Location)
-- 4 sort options (Highest Fit, Growth, Leadership, Most Active)
-- Gold gradient highlight for #1 ranked candidate
-- Row animations on load
-
-### 👤 Candidate Detail (`/candidate/[id]`)
-- LinkedIn Recruiter-style profile card
-- AI-generated recruiter summary
-- Quick Stats with Score Rings (Fit, Behavior, Growth, Activity)
-- 4-tab detailed analysis:
-  - **Behavioral Analysis**: Radar chart with 7 dimensions + explanation cards
-  - **Career Trajectory**: Timeline with promotion velocity, growth potential, career momentum
-  - **AI Explainability**: Why this candidate, Strengths, Concerns, Missing Skills
-  - **Recruiter Notes**: Actionable insights
-
-### 🤖 AI Recruiter Copilot (`/ai-copilot`)
-- ChatGPT-like conversational interface
-- 4 predefined questions
-- Streaming response simulation
-- User/AI message bubbles with avatars
-- Loading spinner during response generation
-
-### 📈 Advanced Analytics (`/analytics`)
-- Skill Distribution bar chart
-- Industry Distribution pie chart
-- Behavior Distribution line chart
-- Growth Potential Distribution bar chart
-- Interactive Recharts with dark theme tooltips
-
-### 📤 Submission Center (`/submission`)
-- CSV file upload with drag-and-drop zone
-- Validation progress bar
-- "Ready for Submission" success state
-- Leaderboard preview with download button
-- Finalize submission button
-
-### ⚙️ Settings (`/settings`)
-- Organization Name & Contact Email inputs
-- Dark Mode toggle
-- AI Ranking Algorithm selector (3 models)
-- AI Explainability toggle
-- Copilot Proactive Suggestions toggle
+These signals are transformed into recruiter-relevant traits.
 
 ---
 
-## 🎨 Design System
+# 🤖 AI Agents
 
-### Theme
-- **Background**: `#09090B` (dark)
-- **Cards**: `#111113`
-- **Borders**: Subtle glassmorphism (`rgba(255,255,255,0.06)`)
-- **Accent**: Electric Blue (`#3B82F6`), Purple (`#8B5CF6`), Cyan (`#06B6D4`)
-- **Typography**: Inter font family
+## 1. Role Understanding Agent
 
-### Components
-- **Buttons**: Gradient (blue→purple), Outline, Ghost, Gold variants
-- **Badges**: Color-coded by context (blue=skills, purple=preferred, green=strengths, red=concerns)
-- **Cards**: Dark with subtle borders, hover lift effects
-- **Progress Bars**: Animated with gradient fills
-- **Score Rings**: Circular progress indicators
-- **Avatars**: DiceBear generated initials
+### Purpose
 
-### Animations (Framer Motion)
-- Page transitions (fade + slide)
-- Card hover effects (scale, lift)
-- Animated counters
-- Scroll-triggered fade-ins
-- Leaderboard row animations
-- Chart animations
-- Loading shimmer effects
-- Floating card animations
+Reads the job description and understands:
 
----
+* Required skills
+* Preferred skills
+* Seniority level
+* Responsibilities
+* Industry context
+* Behavioral expectations
 
-## 🛠️ Tech Stack
+### Output
 
-| Technology | Purpose |
-|------------|---------|
-| **Next.js 15** | React framework with App Router |
-| **TypeScript** | Type safety |
-| **Tailwind CSS v4** | Utility-first styling |
-| **Framer Motion** | Animations & transitions |
-| **Recharts** | Data visualizations |
-| **Lucide React** | Icon library |
-| **Radix UI** | Accessible UI primitives |
-
-### Key Dependencies
 ```json
 {
-  "framer-motion": "^12.42.0",
-  "lucide-react": "^1.21.0",
-  "next": "16.2.9",
-  "react": "19.2.4",
-  "recharts": "^3.9.0",
-  "tailwindcss": "^4"
+  "required_skills": [],
+  "preferred_skills": [],
+  "behavioral_traits": []
 }
 ```
 
 ---
 
-## 📁 Project Structure
+## 2. Candidate Intelligence Agent
 
-```
-challenge_ai_hiring/ui/frontend/
-├── app/
-│   ├── layout.tsx              # Root layout with AnimatePresence
-│   ├── main-layout.tsx         # Sidebar + Top Navigation layout
-│   ├── globals.css             # Global styles, themes, animations
-│   ├── page.tsx                # Landing page
-│   ├── demo/page.tsx           # Interactive demo
-│   ├── dashboard/page.tsx      # Executive dashboard
-│   ├── job-analysis/page.tsx   # Job analysis
-│   ├── ranking/page.tsx        # Candidate rankings
-│   ├── candidate/[id]/page.tsx # Candidate detail
-│   ├── ai-copilot/page.tsx     # AI Recruiter Copilot
-│   ├── analytics/page.tsx      # Advanced analytics
-│   ├── submission/page.tsx     # Submission center
-│   └── settings/page.tsx       # Settings
-├── components/
-│   ├── ui/                     # Shadcn-style UI components
-│   │   ├── button.tsx
-│   │   ├── card.tsx
-│   │   ├── badge.tsx
-│   │   ├── progress.tsx
-│   │   ├── avatar.tsx
-│   │   ├── input.tsx
-│   │   ├── label.tsx
-│   │   ├── switch.tsx
-│   │   ├── select.tsx
-│   │   ├── tabs.tsx
-│   │   ├── separator.tsx
-│   │   ├── tooltip.tsx
-│   │   ├── scroll-area.tsx
-│   │   └── toggle.tsx
-│   ├── particle-network.tsx    # Animated particle background
-│   ├── animated-counter.tsx    # Number counter animation
-│   ├── score-ring.tsx          # Circular score indicator
-│   └── page-transition.tsx     # Page transition wrapper
-├── lib/
-│   ├── utils.ts                # cn() helper, formatNumber()
-│   └── data.ts                 # Mock data
-└── package.json
+### Purpose
+
+Transforms raw candidate records into recruiter-friendly profiles.
+
+### Extracts
+
+* Experience
+* Skills
+* Certifications
+* Industry expertise
+* Projects
+* Education
+
+### Output
+
+A structured candidate profile.
+
+---
+
+## 3. Behavioral Signal Agent
+
+### Purpose
+
+Converts Redrob platform signals into human behavioral traits.
+
+### Measures
+
+* Ownership
+* Leadership
+* Communication
+* Initiative
+* Consistency
+* Collaboration
+* Learning Mindset
+
+---
+
+## 4. Career Trajectory Agent
+
+### Purpose
+
+Analyzes professional growth.
+
+### Measures
+
+* Promotion velocity
+* Responsibility growth
+* Leadership growth
+* Career momentum
+
+---
+
+## 5. Platform Activity Agent
+
+### Purpose
+
+Evaluates candidate engagement and market relevance.
+
+### Signals Used
+
+* Profile views
+* Recruiter saves
+* Search appearances
+* Response rate
+* GitHub activity
+
+---
+
+## 6. Hybrid Retrieval Engine
+
+### Purpose
+
+Efficiently retrieve the most relevant candidates from large candidate pools.
+
+### Technology
+
+* BGE-M3 Embeddings
+* FAISS Vector Database
+
+### Retrieval Formula
+
+```text
+40% Semantic Similarity
+30% Skill Alignment
+30% Experience Alignment
 ```
 
 ---
 
-## 🌐 API Integration
+## 7. Recruiter Ranking Agent
 
-The frontend is designed to connect to a backend API. The mock data in `lib/data.ts` and inline in pages can be replaced with real API calls. Key integration points:
+### Purpose
 
-- **Ranking data**: Replace `candidatesData` in `/ranking/page.tsx`
-- **Candidate profiles**: Replace `candidatesData` in `/candidate/[id]/page.tsx`
-- **Job analysis**: Replace `roleData` in `/job-analysis/page.tsx`
-- **AI Copilot**: Replace simulated responses with actual API calls
-- **Analytics**: Replace chart data with API responses
-- **Submission**: Replace simulated validation with real file processing
+Simulates an expert recruiter.
+
+### Evaluates
+
+* Skill Match
+* Experience Match
+* Behavioral Fit
+* Growth Potential
+* Platform Activity
+* Domain Relevance
 
 ---
 
-## 🏗️ Build & Deploy
+## 8. Explainability Agent
+
+### Purpose
+
+Ensures recruiter trust.
+
+Generates:
+
+* Strengths
+* Weaknesses
+* Missing skills
+* Ranking rationale
+
+---
+
+# 📈 Candidate Scoring Framework
+
+Final score is calculated using:
+
+```text
+Final Score =
+
+0.25 × Skill Match
+
++ 0.20 × Experience Match
+
++ 0.20 × Behavioral Fit
+
++ 0.15 × Growth Potential
+
++ 0.10 × Platform Activity
+
++ 0.10 × Semantic Similarity
+```
+
+This approach provides a balanced recruiter-style evaluation.
+
+---
+
+# 🎨 Frontend Dashboard
+
+TalentMind AI includes a modern recruiter dashboard featuring:
+
+### Executive Dashboard
+
+* Hiring insights
+* Candidate statistics
+* Funnel analytics
+
+### Job Analysis
+
+* Role understanding
+* Skill extraction
+* Behavioral expectations
+
+### Candidate Rankings
+
+* AI-generated rankings
+* Filtering and sorting
+
+### Candidate Profiles
+
+* Behavioral radar charts
+* Career trajectory visualizations
+* Explainability reports
+
+### AI Recruiter Copilot
+
+Natural language recruiter assistant.
+
+Example questions:
+
+```text
+Why is Candidate A ranked above Candidate B?
+
+Show candidates with strong leadership.
+
+Find candidates with AI experience.
+```
+
+---
+
+# 🌟 Key Innovations
+
+### Behavioral Intelligence
+
+Most systems ignore behavioral signals.
+
+TalentMind AI incorporates behavioral scoring directly into candidate ranking.
+
+---
+
+### Career Trajectory Analysis
+
+Measures candidate growth instead of static experience.
+
+---
+
+### Explainable AI
+
+Every recommendation includes reasoning and evidence.
+
+---
+
+### Recruiter-Centric Design
+
+Built around how recruiters actually evaluate talent.
+
+---
+
+# 💼 Business Impact
+
+TalentMind AI helps organizations:
+
+### Reduce Screening Time
+
+Hours → Minutes
+
+---
+
+### Improve Candidate Quality
+
+Better shortlists.
+
+Higher recruiter confidence.
+
+---
+
+### Reduce False Negatives
+
+Strong candidates are less likely to be overlooked.
+
+---
+
+### Improve Hiring Decisions
+
+More context.
+
+More transparency.
+
+More trust.
+
+---
+
+# 🔮 Future Roadmap
+
+## Phase 1
+
+Current Hackathon MVP
+
+* Role Understanding
+* Candidate Ranking
+* Behavioral Analysis
+* Explainability
+
+---
+
+## Phase 2
+
+Real-Time ATS Integration
+
+Support:
+
+* Greenhouse
+* Lever
+* Ashby
+* Workday
+
+---
+
+## Phase 3
+
+Interview Intelligence
+
+* Interview question generation
+* Candidate fit prediction
+* Hiring risk assessment
+
+---
+
+## Phase 4
+
+Talent Graph
+
+Relationship mapping between:
+
+* Skills
+* Industries
+* Career paths
+* Hiring outcomes
+
+---
+
+## Phase 5
+
+Autonomous AI Recruiter
+
+An AI agent capable of:
+
+* Sourcing candidates
+* Ranking applicants
+* Conducting screening conversations
+* Recommending hires
+
+---
+
+# ⚙️ Running The Project
+
+## Frontend
 
 ```bash
-# Production build
-npx next build
+cd challenge_ai_hiring/ui/frontend
 
-# Start production server
-npx next start
+npm install
 
-# Export static site
-npx next export
+npm run dev
+```
+
+Access:
+
+```text
+http://localhost:3000
 ```
 
 ---
 
-## 🎯 Design Philosophy
+## Backend
 
-This frontend was built with the following principles:
+```bash
+cd challenge_ai_hiring
 
-1. **Premium & Executive-grade**: Every pixel is intentional. The design communicates intelligence, trust, and sophistication.
-2. **Recruiter-focused**: High information density with clear hierarchy. Key data is always accessible.
-3. **Minimal but powerful**: No clutter. Every element serves a purpose.
-4. **Beautiful animations**: Motion is used to guide attention and create delight, not for decoration.
-5. **Production quality**: The UI should feel like a venture-backed AI recruiting startup product.
+pip install -r requirements.txt
+
+uvicorn src.api.main:app --reload
+```
+
+Access:
+
+```text
+http://localhost:8000
+```
+
+API Docs:
+
+```text
+http://localhost:8000/docs
+```
 
 ---
 
-## 📝 License
+# 📦 Submission Output
 
-MIT License - feel free to use for hackathons, demos, and production projects.
+The system generates:
+
+```text
+submission.csv
+```
+
+which conforms to:
+
+```text
+sample_submission.csv
+```
+
+and can be validated using:
+
+```bash
+python validate_submission.py
+```
 
 ---
 
-## 🙏 Acknowledgments
+# 👥 Team
 
-- Design inspiration from Linear, Vercel, Ashby, Greenhouse, LinkedIn Recruiter, Eightfold AI, and Stripe Dashboard
-- Built with Next.js, Tailwind CSS, Framer Motion, and Recharts
-- Icons by Lucide
-- Avatars by DiceBear
+Built for the Data & AI Challenge.
+
+**TalentMind AI**
+*Understanding Talent Beyond Keywords.* 🚀
+
+---
+
+This version reads like a **startup product + hackathon winner README**, which is exactly what judges, recruiters, and reviewers typically expect when opening the repository.
