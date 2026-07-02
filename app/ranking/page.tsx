@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { Card, CardContent, CardHeader, CardTitle } from "../../components/ui/card";
 import { Avatar, AvatarFallback, AvatarImage } from "../../components/ui/avatar";
@@ -10,138 +10,25 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from ".
 import { ArrowUpDown, ChevronDown, MoreHorizontal, Medal, TrendingUp, Star, Zap, Eye, ExternalLink } from "lucide-react";
 import Link from "next/link";
 
-const candidatesData = [
-  {
-    id: "1",
-    rank: 1,
-    name: "Alice Johnson",
-    title: "Senior AI Engineer",
-    avatar: "https://api.dicebear.com/7.x/initials/svg?seed=Alice+Johnson",
-    fitScore: 98,
-    behaviorScore: 95,
-    growthScore: 97,
-    activityScore: 96,
-    skills: ["Python", "Deep Learning", "NLP", "AWS"],
-    experience: "8 years",
-    industry: "Tech",
-    behavior: "Leadership",
-    location: "Remote",
-  },
-  {
-    id: "2",
-    rank: 2,
-    name: "Bob Smith",
-    title: "Lead Data Scientist",
-    avatar: "https://api.dicebear.com/7.x/initials/svg?seed=Bob+Smith",
-    fitScore: 95,
-    behaviorScore: 92,
-    growthScore: 94,
-    activityScore: 90,
-    skills: ["R", "Machine Learning", "Statistics", "GCP"],
-    experience: "10 years",
-    industry: "Finance",
-    behavior: "Ownership",
-    location: "New York",
-  },
-  {
-    id: "3",
-    rank: 3,
-    name: "Charlie Brown",
-    title: "ML Research Scientist",
-    avatar: "https://api.dicebear.com/7.x/initials/svg?seed=Charlie+Brown",
-    fitScore: 92,
-    behaviorScore: 90,
-    growthScore: 91,
-    activityScore: 88,
-    skills: ["Python", "Computer Vision", "Research", "TensorFlow"],
-    experience: "6 years",
-    industry: "Academia",
-    behavior: "Innovation",
-    location: "San Francisco",
-  },
-  {
-    id: "4",
-    rank: 4,
-    name: "Diana Prince",
-    title: "Principal Software Engineer",
-    avatar: "https://api.dicebear.com/7.x/initials/svg?seed=Diana+Prince",
-    fitScore: 90,
-    behaviorScore: 88,
-    growthScore: 90,
-    activityScore: 92,
-    skills: ["Java", "Distributed Systems", "Azure", "Microservices"],
-    experience: "12 years",
-    industry: "Enterprise",
-    behavior: "Collaboration",
-    location: "Seattle",
-  },
-  {
-    id: "5",
-    rank: 5,
-    name: "Eve Adams",
-    title: "AI Product Manager",
-    avatar: "https://api.dicebear.com/7.x/initials/svg?seed=Eve+Adams",
-    fitScore: 88,
-    behaviorScore: 85,
-    growthScore: 89,
-    activityScore: 87,
-    skills: ["Product Management", "AI Strategy", "Market Analysis", "Agile"],
-    experience: "7 years",
-    industry: "Tech",
-    behavior: "Communication",
-    location: "Boston",
-  },
-  {
-    id: "6",
-    rank: 6,
-    name: "Frank Castle",
-    title: "MLOps Engineer",
-    avatar: "https://api.dicebear.com/7.x/initials/svg?seed=Frank+Castle",
-    fitScore: 86,
-    behaviorScore: 82,
-    growthScore: 88,
-    activityScore: 84,
-    skills: ["Docker", "Kubernetes", "MLflow", "CI/CD"],
-    experience: "5 years",
-    industry: "Tech",
-    behavior: "Ownership",
-    location: "Austin",
-  },
-  {
-    id: "7",
-    rank: 7,
-    name: "Grace Hopper",
-    title: "Research Scientist",
-    avatar: "https://api.dicebear.com/7.x/initials/svg?seed=Grace+Hopper",
-    fitScore: 85,
-    behaviorScore: 87,
-    growthScore: 86,
-    activityScore: 83,
-    skills: ["Python", "Quantum Computing", "Algorithms", "C++"],
-    experience: "9 years",
-    industry: "Academia",
-    behavior: "Innovation",
-    location: "Cambridge",
-  },
-  {
-    id: "8",
-    rank: 8,
-    name: "Henry Cavill",
-    title: "Data Engineer",
-    avatar: "https://api.dicebear.com/7.x/initials/svg?seed=Henry+Cavill",
-    fitScore: 83,
-    behaviorScore: 80,
-    growthScore: 85,
-    activityScore: 82,
-    skills: ["SQL", "Spark", "Airflow", "Snowflake"],
-    experience: "6 years",
-    industry: "Finance",
-    behavior: "Collaboration",
-    location: "Chicago",
-  },
-];
-
 const CandidateRankingPage = () => {
+  const [candidatesData, setCandidatesData] = useState<any[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    fetch("http://127.0.0.1:8000/api/rank")
+      .then((res) => res.json())
+      .then((data) => {
+        if (!data.error) {
+          setCandidatesData(data);
+        }
+        setLoading(false);
+      })
+      .catch((err) => {
+        console.error("Failed to load rankings", err);
+        setLoading(false);
+      });
+  }, []);
+
   const [filters, setFilters] = useState({
     skills: "",
     experience: "",

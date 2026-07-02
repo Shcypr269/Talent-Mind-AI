@@ -28,46 +28,59 @@ const AiCopilotPage = () => {
   const [input, setInput] = useState("");
   const [loading, setLoading] = useState(false);
 
-  const handleSendMessage = async () => {
-    if (input.trim() === "") return;
+  const handleSendMessage = async (customInput?: string) => {
+    const textToSend = customInput || input;
+    if (textToSend.trim() === "") return;
 
     const newUserMessage: Message = {
       id: Date.now().toString(),
       sender: "user",
-      text: input,
+      text: textToSend,
     };
     setMessages((prev) => [...prev, newUserMessage]);
     setInput("");
     setLoading(true);
 
-    // Simulate AI response with streaming effect
-    const aiResponseText = `I am processing your request: "${input}". Please wait a moment while I generate the most relevant insights for you. This might involve deep diving into candidate data, comparing skill sets, or analyzing behavioral patterns based on our extensive talent intelligence.`;
-    const aiMessageId = Date.now().toString() + "-ai";
+    try {
+      const res = await fetch(`http://127.0.0.1:8000/api/copilot?query=${encodeURIComponent(textToSend)}`);
+      const data = await res.json();
+      const aiResponseText = data.response || "Sorry, I encountered an error processing your query.";
+      const aiMessageId = Date.now().toString() + "-ai";
 
-    let currentAiText = "";
-    const words = aiResponseText.split(" ");
+      let currentAiText = "";
+      const words = aiResponseText.split(" ");
 
-    for (let i = 0; i < words.length; i++) {
-      await new Promise((resolve) => setTimeout(resolve, 50)); // Simulate typing delay
-      currentAiText += (i > 0 ? " " : "") + words[i];
-      setMessages((prev) => {
-        const existingMessageIndex = prev.findIndex((msg) => msg.id === aiMessageId);
-        if (existingMessageIndex > -1) {
-          const updatedMessages = [...prev];
-          updatedMessages[existingMessageIndex] = { ...updatedMessages[existingMessageIndex], text: currentAiText };
-          return updatedMessages;
-        } else {
-          return [...prev, { id: aiMessageId, sender: "ai", text: currentAiText }];
-        }
-      });
+      for (let i = 0; i < words.length; i++) {
+        await new Promise((resolve) => setTimeout(resolve, 20)); // typing effect
+        currentAiText += (i > 0 ? " " : "") + words[i];
+        setMessages((prev) => {
+          const existingMessageIndex = prev.findIndex((msg) => msg.id === aiMessageId);
+          if (existingMessageIndex > -1) {
+            const updatedMessages = [...prev];
+            updatedMessages[existingMessageIndex] = { ...updatedMessages[existingMessageIndex], text: currentAiText };
+            return updatedMessages;
+          } else {
+            return [...prev, { id: aiMessageId, sender: "ai", text: currentAiText }];
+          }
+        });
+      }
+    } catch (err) {
+      console.error(err);
+      setMessages((prev) => [
+        ...prev,
+        {
+          id: Date.now().toString(),
+          sender: "ai",
+          text: "I'm having trouble connecting to the ranking engine API. Please make sure the FastAPI server is running at http://127.0.0.1:8000.",
+        },
+      ]);
+    } finally {
+      setLoading(false);
     }
-    setLoading(false);
   };
 
   const handlePredefinedQuestion = (question: string) => {
-    setInput(question);
-    // Optionally, send the message immediately
-    // handleSendMessage(); 
+    handleSendMessage(question);
   };
 
   return (

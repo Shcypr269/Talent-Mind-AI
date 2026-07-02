@@ -1,4 +1,4 @@
-# TalentMind AI 🧠
+# TalentMind AI
 
 ### AI-Powered Hiring Intelligence Platform That Understands Talent Beyond Keywords
 
@@ -6,7 +6,7 @@
 
 ---
 
-## 🚀 Overview
+## Overview
 
 Recruiters often review hundreds or thousands of candidate profiles while trying to identify the best fit for a role.
 
@@ -31,7 +31,7 @@ TalentMind AI asks:
 
 ---
 
-# 🎯 Challenge Statement
+# Challenge Statement
 
 This project was built for the **Data & AI Challenge**.
 
@@ -48,7 +48,7 @@ TalentMind AI addresses each of these requirements through a multi-agent AI arch
 
 ---
 
-# 💡 Problem We Are Solving
+# Problem We Are Solving
 
 Recruiters face three major problems:
 
@@ -82,62 +82,62 @@ Most ranking systems ignore trajectory and focus only on static experience.
 
 ---
 
-# 🏗 Solution
+# Solution
 
 TalentMind AI combines structured candidate intelligence with LLM reasoning to rank candidates like an expert recruiter.
 
 The platform evaluates:
 
-✅ Skills
+ Skills
 
-✅ Experience
+ Experience
 
-✅ Behavioral Signals
+ Behavioral Signals
 
-✅ Career Growth
+ Career Growth
 
-✅ Platform Activity
+ Platform Activity
 
-✅ Semantic Role Fit
+ Semantic Role Fit
 
 ---
 
-# 🧠 System Architecture
+# System Architecture
 
 ```text
 Job Description
-        │
-        ▼
+ │
+ ▼
 Role Understanding Agent
-        │
-        ▼
+ │
+ ▼
 Candidate Intelligence Agent
-        │
-        ▼
+ │
+ ▼
 Behavioral Signal Agent
-        │
-        ▼
+ │
+ ▼
 Career Trajectory Agent
-        │
-        ▼
+ │
+ ▼
 Platform Activity Agent
-        │
-        ▼
+ │
+ ▼
 Hybrid Retrieval Engine
-        │
-        ▼
+ │
+ ▼
 LLM Recruiter Ranking Agent
-        │
-        ▼
+ │
+ ▼
 Explainability Agent
-        │
-        ▼
+ │
+ ▼
 Final Ranked Shortlist
 ```
 
 ---
 
-# 📊 Dataset Usage
+# Dataset Usage
 
 The challenge provides:
 
@@ -178,7 +178,7 @@ These signals are transformed into recruiter-relevant traits.
 
 ---
 
-# 🤖 AI Agents
+# AI Agents
 
 ## 1. Role Understanding Agent
 
@@ -197,9 +197,9 @@ Reads the job description and understands:
 
 ```json
 {
-  "required_skills": [],
-  "preferred_skills": [],
-  "behavioral_traits": []
+ "required_skills": [],
+ "preferred_skills": [],
+ "behavioral_traits": []
 }
 ```
 
@@ -328,7 +328,7 @@ Generates:
 
 ---
 
-# 📈 Candidate Scoring Framework
+# Candidate Scoring Framework
 
 Final score is calculated using:
 
@@ -352,7 +352,7 @@ This approach provides a balanced recruiter-style evaluation.
 
 ---
 
-# 🎨 Frontend Dashboard
+# Frontend Dashboard
 
 TalentMind AI includes a modern recruiter dashboard featuring:
 
@@ -395,7 +395,7 @@ Find candidates with AI experience.
 
 ---
 
-# 🌟 Key Innovations
+# Key Innovations
 
 ### Behavioral Intelligence
 
@@ -423,13 +423,13 @@ Built around how recruiters actually evaluate talent.
 
 ---
 
-# 💼 Business Impact
+# Business Impact
 
 TalentMind AI helps organizations:
 
 ### Reduce Screening Time
 
-Hours → Minutes
+Hours Minutes
 
 ---
 
@@ -457,7 +457,7 @@ More trust.
 
 ---
 
-# 🔮 Future Roadmap
+# Future Roadmap
 
 ## Phase 1
 
@@ -519,79 +519,78 @@ An AI agent capable of:
 
 ---
 
-# ⚙️ Running The Project
+# ️ Running The Project
 
-## Frontend
+The project is structured with a Next.js frontend at the root and our modular Python ranking engine in the `engine/` directory.
 
+## 1. Frontend Setup (Next.js Dashboard)
+
+Install node modules and start the dev server:
 ```bash
-cd challenge_ai_hiring/ui/frontend
-
+# From the root directory
 npm install
-
 npm run dev
 ```
 
-Access:
-
+Access the UI dashboard at:
 ```text
 http://localhost:3000
 ```
 
 ---
 
-## Backend
+## 2. Backend Setup (FastAPI Server)
 
+Install Python dependencies and start the API server:
 ```bash
-cd challenge_ai_hiring
+# Install packages
+pip install -r engine/requirements.txt
 
-pip install -r requirements.txt
-
-uvicorn src.api.main:app --reload
+# Start API server
+uvicorn engine.src.api.main:app --reload
 ```
 
-Access:
-
+Access the API at:
 ```text
-http://localhost:8000
-```
-
-API Docs:
-
-```text
-http://localhost:8000/docs
+http://127.0.0.1:8000/api/rank
 ```
 
 ---
 
-# 📦 Submission Output
+## 3. Running the AI Ranking Pipeline (Command Line)
+
+To run the ranking engine offline against candidate datasets:
+
+**Step A: Precompute Embeddings**
+Generate dense semantic embeddings for candidate profiles:
+```bash
+python -m engine.src.pipeline.precompute --input path/to/candidates.jsonl
+```
+
+**Step B: Execute Ranking & Scoring**
+Retrieve top matches via Hybrid Search (FAISS + BM25) and score them via the Composite Scorer:
+```bash
+python -m engine.src.pipeline.rank --input path/to/candidates.jsonl --output submission.csv
+```
+
+---
+
+# Submission Output
 
 The system generates:
+- `submission.csv` containing the top 100 candidates formatted to the exact spec.
+- `submission.xlsx` if portal requires Excel uploads.
 
-```text
-submission.csv
-```
-
-which conforms to:
-
-```text
-sample_submission.csv
-```
-
-and can be validated using:
-
+You can validate the output using the organizers' script:
 ```bash
 python validate_submission.py
 ```
 
 ---
 
-# 👥 Team
+# Team
 
 Built for the Data & AI Challenge.
 
 **TalentMind AI**
-*Understanding Talent Beyond Keywords.* 🚀
-
----
-
-This version reads like a **startup product + hackathon winner README**, which is exactly what judges, recruiters, and reviewers typically expect when opening the repository.
+*Understanding Talent Beyond Keywords.*

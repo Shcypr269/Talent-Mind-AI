@@ -39,3 +39,18 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+env/
+
+# Large Datasets and Cache
+/*India_runs_data_and_ai_challenge/
+/\[PUB\]*
+/engine/data/*.npy
+*.npy
+*.gz
+submission.csv
+submission.xlsx
