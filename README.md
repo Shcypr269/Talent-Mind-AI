@@ -557,7 +557,21 @@ http://127.0.0.1:8000/api/rank
 
 ---
 
-## 3. Running the AI Ranking Pipeline (Command Line)
+## 3. Optional LLM Explainability Setup
+
+The system includes a lightning-fast deterministic explainability engine by default. However, you can optionally enable the `ExplainabilityAgent` to use OpenAI for generating dynamic, recruiter-style reasoning.
+
+To enable this:
+1. Create a `.env` file in the root directory.
+2. Add your API key:
+```env
+OPENAI_API_KEY=your-api-key-here
+```
+If the key is missing or fails, the pipeline will instantly fall back to the deterministic engine to ensure uninterrupted execution.
+
+---
+
+## 4. Running the AI Ranking Pipeline (Command Line)
 
 To run the ranking engine offline against candidate datasets:
 
@@ -568,7 +582,7 @@ python -m engine.src.pipeline.precompute --input path/to/candidates.jsonl
 ```
 
 **Step B: Execute Ranking & Scoring**
-Retrieve top matches via Hybrid Search (FAISS + BM25) and score them via the Composite Scorer:
+Retrieve top matches via Hybrid Search (FAISS + BM25) and score them via the LLM Recruiter Agent:
 ```bash
 python -m engine.src.pipeline.rank --input path/to/candidates.jsonl --output submission.csv
 ```

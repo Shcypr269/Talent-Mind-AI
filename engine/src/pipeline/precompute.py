@@ -29,7 +29,7 @@ def precompute(input_path: str, output_dir: str):
     np.save(emb_path, embeddings)
     logger.info(f"Saved candidate embeddings to {emb_path}")
     
-    logger.info("Generating JD embedding...")
+    logger.info("Generating JD embedding")
     jd = JobDescription()
     jd_emb = embedder.embed_jd(jd)
     jd_path = out_path / "jd_embedding.npy"

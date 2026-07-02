@@ -1,7 +1,7 @@
 from ..models.candidate import Candidate
 from ..models.job_description import JobDescription
 
-class SkillMatcher:
+class CandidateIntelligenceAgent:
     def __init__(self, jd: JobDescription):
         self.jd = jd
         self.required_skills = {s.lower() for s in jd.required_skills}

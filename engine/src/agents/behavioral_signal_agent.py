@@ -1,7 +1,7 @@
 from ..models.candidate import Candidate
 from datetime import datetime
 
-class BehavioralScorer:
+class BehavioralSignalAgent:
     def __init__(self):
         self.reference_date = datetime(2026, 7, 1)
 

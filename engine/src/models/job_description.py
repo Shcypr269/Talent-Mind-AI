@@ -4,7 +4,6 @@ from typing import List
 class JobDescription(BaseModel):
     title: str = "Senior AI Engineer"
     
-    # Required skills parsed from JD
     required_skills: List[str] = [
         "Python",
         "embeddings",
@@ -15,7 +14,6 @@ class JobDescription(BaseModel):
         "evaluation frameworks"
     ]
     
-    # Preferred skills
     preferred_skills: List[str] = [
         "LLM fine-tuning", "LoRA", "QLoRA", "PEFT",
         "learning-to-rank", "XGBoost",
@@ -24,7 +22,6 @@ class JobDescription(BaseModel):
         "open-source"
     ]
     
-    # Anti-patterns from JD
     anti_patterns_consulting: List[str] = [
         "TCS", "Infosys", "Wipro", "Accenture", "Cognizant", "Capgemini"
     ]

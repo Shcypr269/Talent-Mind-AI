@@ -1,7 +1,7 @@
 from ..models.candidate import Candidate
 from ..models.job_description import JobDescription
 
-class LogisticsFitter:
+class PlatformActivityAgent:
     def __init__(self, jd: JobDescription):
         self.jd = jd
         self.preferred_locations = {loc.lower() for loc in jd.preferred_locations}

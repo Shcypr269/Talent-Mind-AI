@@ -2,7 +2,7 @@ from ..models.candidate import Candidate
 from ..models.job_description import JobDescription
 from datetime import datetime
 
-class CareerTrajectoryAnalyzer:
+class CareerTrajectoryAgent:
     def __init__(self, jd: JobDescription):
         self.jd = jd
         self.consulting_firms = {f.lower() for f in jd.anti_patterns_consulting}
