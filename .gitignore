@@ -54,3 +54,7 @@ env/
 *.gz
 submission.csv
 submission.xlsx
+
+# Agent Customizations
+AGENTS.md
+CLAUDE.md
