@@ -21,6 +21,35 @@ const predefinedQuestions = [
   "Compare Candidate A and B.",
 ];
 
+const parseBoldText = (text: string) => {
+  const parts = text.split(/\*\*(.*?)\*\*/g);
+  return parts.map((part, i) => {
+    if (i % 2 === 1) {
+      return <strong key={i} className="font-semibold text-white">{part}</strong>;
+    }
+    return part;
+  });
+};
+
+const renderMessageText = (text: string) => {
+  const lines = text.split("\n");
+  return lines.map((line, idx) => {
+    if (line.trim().startsWith("- ")) {
+      const bulletContent = line.trim().substring(2);
+      return (
+        <li key={idx} className="ml-4 list-disc mt-1 text-sm text-gray-300">
+          {parseBoldText(bulletContent)}
+        </li>
+      );
+    }
+    return (
+      <p key={idx} className="mb-1 text-sm text-gray-200">
+        {parseBoldText(line)}
+      </p>
+    );
+  });
+};
+
 const AiCopilotPage = () => {
   const [messages, setMessages] = useState<Message[]>(
     [{ id: "1", sender: "ai", text: "Hello! How can I assist you with your hiring today?" }]
@@ -115,7 +144,7 @@ const AiCopilotPage = () => {
                         : "bg-gray-700/30 text-gray-200 rounded-bl-none"
                     }`}
                   >
-                    {msg.text}
+                    {msg.sender === "ai" ? renderMessageText(msg.text) : msg.text}
                   </div>
                   {msg.sender === "user" && (
                     <Avatar className="h-8 w-8 ml-3 bg-purple-500/20 text-purple-300">
