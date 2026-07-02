@@ -559,15 +559,15 @@ http://127.0.0.1:8000/api/rank
 
 ## 3. Optional LLM Explainability Setup
 
-The system includes a lightning-fast deterministic explainability engine by default. However, you can optionally enable the `ExplainabilityAgent` to use OpenAI for generating dynamic, recruiter-style reasoning.
+The system includes a lightning-fast deterministic explainability engine by default. However, you can optionally enable the `ExplainabilityAgent` to use Groq for generating dynamic, recruiter-style reasoning.
 
 To enable this:
 1. Create a `.env` file in the root directory.
 2. Add your API key:
 ```env
-OPENAI_API_KEY=your-api-key-here
+GROQ_API_KEY=your-api-key-here
 ```
-If the key is missing or fails, the pipeline will instantly fall back to the deterministic engine to ensure uninterrupted execution.
+**Rate-Limit Resilience:** Groq's free tier has strict rate limits (e.g., 30 RPM). Since we process the Top 100 concurrently for maximum speed, the pipeline will seamlessly utilize the LLM for the first requests and instantly fall back to the deterministic engine for any rate-limited requests, guaranteeing 0 downtime and no crashes.
 
 ---
 

@@ -9,15 +9,15 @@ class ExplainabilityAgent:
         if breakdown.get("honeypot"):
             return f"Disqualified: {breakdown.get('reason')}"
             
-        openai_key = os.getenv("OPENAI_API_KEY")
-        if openai_key:
-            return self._generate_with_llm(candidate, breakdown, openai_key)
+        groq_key = os.getenv("GROQ_API_KEY")
+        if groq_key:
+            return self._generate_with_llm(candidate, breakdown, groq_key)
             
         return self._generate_deterministic(candidate, breakdown)
         
     def _generate_with_llm(self, candidate: Candidate, breakdown: Dict[str, Any], api_key: str) -> str:
-        import openai
-        client = openai.OpenAI(api_key=api_key)
+        import groq
+        client = groq.Groq(api_key=api_key)
         
         yoe = candidate.profile.years_of_experience
         title = candidate.profile.current_title
@@ -41,7 +41,7 @@ class ExplainabilityAgent:
         
         try:
             response = client.chat.completions.create(
-                model="gpt-4o-mini",
+                model="llama-3.3-70b-versatile",
                 messages=[{"role": "user", "content": prompt}],
                 max_tokens=60,
                 temperature=0.3
