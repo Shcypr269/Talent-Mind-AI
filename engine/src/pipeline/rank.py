@@ -56,7 +56,7 @@ def rank(input_path: str, data_dir: str, output_path: str):
             "breakdown": breakdown
         })
 
-    scored_results.sort(key=lambda x: x["score"], reverse=True)
+    scored_results.sort(key=lambda x: (-x["score"], x["candidate_id"]))
     top_100 = scored_results[:100]
     
     logger.info("Generating explainability reasoning for Top 100...")

@@ -28,6 +28,6 @@ def write_submission_csv(
             writer.writerow({
                 "candidate_id": row["candidate_id"],
                 "rank": row["rank"],
-                "score": f"{row['score']:.4f}",  
+                "score": f"{row['score']:.10f}",  
                 "reasoning": row.get("reasoning", "")
             })

@@ -30,7 +30,14 @@ class EmbeddingService:
 
     def embed_candidates(self, candidates: List[Candidate]) -> np.ndarray:
         texts = [self._prepare_candidate_text(c) for c in candidates]
-        return self.model.encode(texts, convert_to_numpy=True, show_progress_bar=True)
+        try:
+            pool = self.model.start_multi_process_pool()
+            embeddings = self.model.encode_multi_process(texts, pool)
+            self.model.stop_multi_process_pool(pool)
+            return embeddings
+        except Exception as e:
+            print(f"Multi-process encoding failed: {e}. Falling back to single-process.")
+            return self.model.encode(texts, convert_to_numpy=True, show_progress_bar=True)
 
     def embed_jd(self, jd: JobDescription) -> np.ndarray:
         text = self._prepare_jd_text(jd)
