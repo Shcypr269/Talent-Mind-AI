@@ -17,14 +17,45 @@ app.add_middleware(
 
 
 SUBMISSION_PATH = Path("submission.csv")
-CANDIDATES_PATH = Path(r"c:\Users\seniv\Downloads\[PUB] India_runs_data_and_ai_challenge\[PUB] India_runs_data_and_ai_challenge\India_runs_data_and_ai_challenge\sample_candidates.json")
+CANDIDATES_JSON_PATH = Path(r"c:\Users\seniv\Downloads\[PUB] India_runs_data_and_ai_challenge\[PUB] India_runs_data_and_ai_challenge\India_runs_data_and_ai_challenge\sample_candidates.json")
+CANDIDATES_JSONL_PATH = Path(r"c:\Users\seniv\Downloads\[PUB] India_runs_data_and_ai_challenge\[PUB] India_runs_data_and_ai_challenge\India_runs_data_and_ai_challenge\candidates.jsonl")
+
+_CANDIDATES_CACHE = None
 
 def load_candidates_dict() -> Dict[str, dict]:
-    if not CANDIDATES_PATH.exists():
-        return {}
-    with open(CANDIDATES_PATH, "r", encoding="utf-8") as f:
-        data = json.load(f)
-        return {item["candidate_id"]: item for item in data}
+    global _CANDIDATES_CACHE
+    if _CANDIDATES_CACHE is not None:
+        return _CANDIDATES_CACHE
+        
+    candidates = {}
+    if CANDIDATES_JSONL_PATH.exists():
+        try:
+            with open(CANDIDATES_JSONL_PATH, "r", encoding="utf-8") as f:
+                for line in f:
+                    line = line.strip()
+                    if not line:
+                        continue
+                    try:
+                        item = json.loads(line)
+                        candidates[item["candidate_id"]] = item
+                    except Exception:
+                        continue
+            _CANDIDATES_CACHE = candidates
+            return candidates
+        except Exception as e:
+            print(f"Error loading JSONL: {e}")
+            
+    if CANDIDATES_JSON_PATH.exists():
+        try:
+            with open(CANDIDATES_JSON_PATH, "r", encoding="utf-8") as f:
+                data = json.load(f)
+                _CANDIDATES_CACHE = {item["candidate_id"]: item for item in data}
+                return _CANDIDATES_CACHE
+        except Exception as e:
+            print(f"Error loading JSON: {e}")
+            
+    _CANDIDATES_CACHE = {}
+    return _CANDIDATES_CACHE
 
 @app.get("/api/rank")
 def get_rankings():
